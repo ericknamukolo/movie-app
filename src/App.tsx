@@ -4,6 +4,8 @@ import Movie from './models/movie';
 import MoviePoster from './components/movie-poster';
 import WatchedMovieList from './components/movie-list';
 import Summary from './components/summary';
+import MovieListPoster from './components/movie-list-poster';
+import AppContainer from './layouts/app-container';
 
 const tempMovieData: Movie[] = [
   {
@@ -72,8 +74,7 @@ export default function App() {
   return (
     <>
       <NavBar movies={movies} />
-
-      <main className='main'>
+      <AppContainer>
         <div className='box'>
           <button
             className='btn-toggle'
@@ -84,16 +85,7 @@ export default function App() {
           {isOpen1 && (
             <ul className='list'>
               {movies?.map((movie) => (
-                <li key={movie.imdbID}>
-                  <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                  <h3>{movie.Title}</h3>
-                  <div>
-                    <p>
-                      <span>🗓</span>
-                      <span>{movie.Year}</span>
-                    </p>
-                  </div>
-                </li>
+                <MovieListPoster movie={movie} />
               ))}
             </ul>
           )}
@@ -118,7 +110,7 @@ export default function App() {
             </>
           )}
         </div>
-      </main>
+      </AppContainer>
     </>
   );
 }
