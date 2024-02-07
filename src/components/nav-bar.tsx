@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Movie from '../models/movie';
 
-const NavBar: React.FC<{}> = () => {
+const NavBar: React.FC<{ movies: Movie[] }> = ({ movies }) => {
+  const [query, setQuery] = useState('');
   return (
     <nav className='nav-bar'>
       <div className='logo'>

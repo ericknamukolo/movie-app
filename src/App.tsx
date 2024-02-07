@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import NavBar from './components/nav-bar';
+import Movie from './models/movie';
 
-const tempMovieData = [
+const tempMovieData: Movie[] = [
   {
     imdbID: 'tt1375666',
     Title: 'Inception',
@@ -25,7 +26,7 @@ const tempMovieData = [
   },
 ];
 
-const tempWatchedData = [
+const tempWatchedData: Movie[] = [
   {
     imdbID: 'tt1375666',
     Title: 'Inception',
@@ -56,7 +57,6 @@ const average = (arr: any) =>
   );
 
 export default function App() {
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar movies={movies} />
 
       <main className='main'>
         <div className='box'>
