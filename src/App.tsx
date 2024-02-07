@@ -3,6 +3,7 @@ import NavBar from './components/nav-bar';
 import Movie from './models/movie';
 import MoviePoster from './components/movie-poster';
 import WatchedMovieList from './components/movie-list';
+import Summary from './components/summary';
 
 const tempMovieData: Movie[] = [
   {
@@ -107,27 +108,12 @@ export default function App() {
           </button>
           {isOpen2 && (
             <>
-              <div className='summary'>
-                <h2>Movies you watched</h2>
-                <div>
-                  <p>
-                    <span>#️⃣</span>
-                    <span>{watched.length} movies</span>
-                  </p>
-                  <p>
-                    <span>⭐️</span>
-                    <span>{avgImdbRating}</span>
-                  </p>
-                  <p>
-                    <span>🌟</span>
-                    <span>{avgUserRating}</span>
-                  </p>
-                  <p>
-                    <span>⏳</span>
-                    <span>{avgRuntime} min</span>
-                  </p>
-                </div>
-              </div>
+              <Summary
+                avgImdbRating={avgImdbRating}
+                avgRuntime={avgRuntime}
+                avgUserRating={avgUserRating}
+                watched={movies}
+              />
               <WatchedMovieList watched={watched} />
             </>
           )}
