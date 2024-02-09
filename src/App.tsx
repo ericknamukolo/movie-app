@@ -6,6 +6,8 @@ import WatchedMovieList from './components/movie-list';
 import Summary from './components/summary';
 import MovieListPoster from './components/movie-list-poster';
 import AppContainer from './layouts/app-container';
+import ListBox from './components/list-box';
+import WatchedBox from './components/watched-box';
 
 const tempMovieData: Movie[] = [
   {
@@ -54,62 +56,16 @@ const tempWatchedData: Movie[] = [
   },
 ];
 
-const average = (arr: any) =>
-  arr.reduce(
-    (acc: number, cur: number, i: any, arr: string | any[]) =>
-      acc + cur / arr.length,
-    0
-  );
-
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen1, setIsOpen1] = useState(true);
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-  const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRuntime = average(watched.map((movie) => movie.runtime));
 
   return (
     <>
       <NavBar movies={movies} />
       <AppContainer>
-        <div className='box'>
-          <button
-            className='btn-toggle'
-            onClick={() => setIsOpen1((open) => !open)}
-          >
-            {isOpen1 ? '–' : '+'}
-          </button>
-          {isOpen1 && (
-            <ul className='list'>
-              {movies?.map((movie) => (
-                <MovieListPoster movie={movie} />
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className='box'>
-          <button
-            className='btn-toggle'
-            onClick={() => setIsOpen2((open) => !open)}
-          >
-            {isOpen2 ? '–' : '+'}
-          </button>
-          {isOpen2 && (
-            <>
-              <Summary
-                avgImdbRating={avgImdbRating}
-                avgRuntime={avgRuntime}
-                avgUserRating={avgUserRating}
-                watched={movies}
-              />
-              <WatchedMovieList watched={watched} />
-            </>
-          )}
-        </div>
+        <ListBox movies={movies} />
+        <WatchedBox watched={watched} />
       </AppContainer>
     </>
   );
