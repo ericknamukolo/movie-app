@@ -23,4 +23,4 @@ const NavBar: React.FC<{ movies: Movie[] }> = ({ movies }) => {
   );
 };
 
-export default NavBar;
+export default NavBar;  

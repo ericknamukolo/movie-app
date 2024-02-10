@@ -1,15 +1,15 @@
 import React from 'react';
-import MoviePoster from './movie-poster';
 import Movie from '../models/movie';
+import MovieListPoster from './movie-list-poster';
 
-const WatchedMovieList: React.FC<{ watched: Movie[] }> = ({ watched }) => {
+const MovieList: React.FC<{ movies: Movie[] }> = ({ movies }) => {
   return (
     <ul className='list'>
-      {watched.map((movie) => (
-        <MoviePoster movie={movie} />
+      {movies?.map((movie) => (
+        <MovieListPoster movie={movie} />
       ))}
     </ul>
   );
 };
 
-export default WatchedMovieList;
+export default MovieList;
