@@ -6,6 +6,7 @@ import Summary from './components/summary';
 import AppContainer from './layouts/app-container';
 import Box from './layouts/box';
 import MovieList from './components/movie-list';
+import StarRating from './components/star-rating';
 
 const tempMovieData: Movie[] = [
   {
@@ -74,6 +75,7 @@ export default function App() {
       <AppContainer>
         <Box>
           <MovieList movies={movies} />
+          <StarRating maxRating={10} />
         </Box>
         <Box>
           <Summary
