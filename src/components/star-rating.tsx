@@ -38,7 +38,7 @@ const StarRating: React.FC<{ maxRating?: number }> = ({ maxRating = 10 }) => {
           />
         ))}
       </div>
-      <p style={textStyle}>{rating || ''}</p>
+      <p style={textStyle}>{tempRating === 0 ? rating : tempRating || ''}</p>
     </div>
   );
 };
