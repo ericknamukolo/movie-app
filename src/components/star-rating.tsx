@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 
 const StarRating: React.FC<{ maxRating?: number }> = ({ maxRating = 10 }) => {
   const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
 
   function updateRating(newRating: number) {
     setRating(newRating);
+  }
+
+  function updateTempRating(newRating: number) {
+    setTempRating(newRating);
   }
   const containerStyle = {
     display: 'flex',
@@ -27,7 +32,9 @@ const StarRating: React.FC<{ maxRating?: number }> = ({ maxRating = 10 }) => {
           <Star
             key={i}
             click={() => updateRating(i + 1)}
-            full={i + 1 <= rating}
+            full={tempRating === 0 ? i + 1 <= rating : i + 1 <= tempRating}
+            onEnter={() => updateTempRating(i + 1)}
+            onLeave={() => updateTempRating(0)}
           />
         ))}
       </div>
@@ -43,12 +50,19 @@ const starStyle = {
   cursor: 'pointer',
 };
 
-const Star: React.FC<{ click: () => void; full?: boolean }> = ({
-  click,
-  full = false,
-}) => {
+const Star: React.FC<{
+  click: () => void;
+  full?: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+}> = ({ click, full = false, onEnter, onLeave }) => {
   return (
-    <span style={starStyle} onClick={click}>
+    <span
+      style={starStyle}
+      onClick={click}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+    >
       {full ? (
         <svg
           xmlns='http://www.w3.org/2000/svg'
