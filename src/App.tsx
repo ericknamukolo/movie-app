@@ -65,6 +65,7 @@ const average = (arr: any) =>
 
 export default function App() {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [watched, setWatched] = useState(tempWatchedData);
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
@@ -77,12 +78,14 @@ export default function App() {
   async function fetchMovies() {
     try {
       const res: Response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=superman`
+        `http://www.omdbapi.com/?apikey=${apiKey}&s=titanic`
       );
       const data = await res.json();
       setMovies(data.Search);
     } catch (e) {
       alert(e);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -91,7 +94,8 @@ export default function App() {
       <NavBar movies={movies} />
       <AppContainer>
         <Box>
-          <MovieList movies={movies} />
+          {loading ? <h1>Loading</h1> : <MovieList movies={movies} />}
+
           <StarRating maxRating={10} />
         </Box>
         <Box>
@@ -106,7 +110,4 @@ export default function App() {
       </AppContainer>
     </>
   );
-}
-function componentDidMount() {
-  throw new Error('Function not implemented.');
 }
