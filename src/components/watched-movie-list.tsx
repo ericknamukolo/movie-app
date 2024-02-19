@@ -6,7 +6,7 @@ const WatchedMovieList: React.FC<{ watched: Movie[] }> = ({ watched }) => {
   return (
     <ul className='list'>
       {watched.map((movie) => (
-        <MoviePoster movie={movie} />
+        <MoviePoster movie={movie} key={movie.imdbID} />
       ))}
     </ul>
   );

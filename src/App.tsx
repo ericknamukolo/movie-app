@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NavBar from './components/nav-bar';
 import Movie from './models/movie';
 import WatchedMovieList from './components/watched-movie-list';
@@ -7,6 +7,7 @@ import AppContainer from './layouts/app-container';
 import Box from './layouts/box';
 import MovieList from './components/movie-list';
 import StarRating from './components/star-rating';
+import apiKey from './constants/keys';
 
 const tempMovieData: Movie[] = [
   {
@@ -63,11 +64,17 @@ const average = (arr: any) =>
   );
 
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
+  const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
+
+  useEffect(() => {
+    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=batman`).then(
+      (res: Response) => res.json().then((data) => setMovies(data.Search))
+    );
+  }, []);
 
   return (
     <>
@@ -89,4 +96,7 @@ export default function App() {
       </AppContainer>
     </>
   );
+}
+function componentDidMount() {
+  throw new Error('Function not implemented.');
 }
