@@ -67,21 +67,24 @@ const average = (arr: any) =>
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState('batman');
   const [watched, setWatched] = useState(tempWatchedData);
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
   useEffect(() => {
-    fetchMovies();
+    fetchMovies(query);
   }, []);
 
-  async function fetchMovies() {
+  async function fetchMovies(query: string) {
     try {
       const res: Response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=titanic`
+        `http://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
       );
+
       const data = await res.json();
+      if (data.Error !== undefined) return setMovies([]);
       setMovies(data.Search);
     } catch (e) {
       alert(e);
@@ -90,9 +93,14 @@ export default function App() {
     }
   }
 
+  function handleInput(val: string) {
+    setQuery(val);
+    fetchMovies(val);
+  }
+
   return (
     <>
-      <NavBar movies={movies} />
+      <NavBar movies={movies} onQuery={handleInput} query={query} />
       <AppContainer>
         <Box>
           {loading ? (

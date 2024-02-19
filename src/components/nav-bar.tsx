@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import Movie from '../models/movie';
 
-const NavBar: React.FC<{ movies: Movie[] }> = ({ movies }) => {
-  const [query, setQuery] = useState('');
+export default function NavBar({
+  movies,
+  onQuery,
+  query,
+}: {
+  movies: Movie[];
+  onQuery: (value: string) => void;
+  query: string;
+}) {
   return (
     <nav className='nav-bar'>
       <div className='logo'>
@@ -14,13 +21,11 @@ const NavBar: React.FC<{ movies: Movie[] }> = ({ movies }) => {
         type='text'
         placeholder='Search movies...'
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => onQuery(e.target.value)}
       />
       <p className='num-results'>
         Found <strong>{movies.length}</strong> results
       </p>
     </nav>
   );
-};
-
-export default NavBar;  
+}
