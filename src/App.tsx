@@ -8,6 +8,7 @@ import Box from './layouts/box';
 import MovieList from './components/movie-list';
 import StarRating from './components/star-rating';
 import apiKey from './constants/keys';
+import Loader from './components/loader';
 
 const tempMovieData: Movie[] = [
   {
@@ -94,7 +95,11 @@ export default function App() {
       <NavBar movies={movies} />
       <AppContainer>
         <Box>
-          {loading ? <h1>Loading</h1> : <MovieList movies={movies} />}
+          {loading ? (
+            <Loader title='Fetching' />
+          ) : (
+            <MovieList movies={movies} />
+          )}
 
           <StarRating maxRating={10} />
         </Box>
