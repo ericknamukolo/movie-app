@@ -71,10 +71,20 @@ export default function App() {
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=batman`).then(
-      (res: Response) => res.json().then((data) => setMovies(data.Search))
-    );
+    fetchMovies();
   }, []);
+
+  async function fetchMovies() {
+    try {
+      const res: Response = await fetch(
+        `http://www.omdbapi.com/?apikey=${apiKey}&s=superman`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+    } catch (e) {
+      alert(e);
+    }
+  }
 
   return (
     <>
