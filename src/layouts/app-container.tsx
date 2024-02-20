@@ -1,9 +1,9 @@
 import React from 'react';
 
-const AppContainer: React.FC<{ children: React.ReactNode }> = ({
+export default function AppContainer({
   children,
-}) => {
+}: {
+  children: React.ReactNode;
+}) {
   return <main className='main'>{children}</main>;
-};
-
-export default AppContainer;
+}

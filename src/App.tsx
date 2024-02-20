@@ -95,7 +95,6 @@ export default function App() {
 
   function handleInput(val: string) {
     setQuery(val);
-    // fetchMovies(val);
   }
 
   return (

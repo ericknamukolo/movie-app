@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Box: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export default function Box({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <div className='box'>
@@ -11,6 +11,4 @@ const Box: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {isOpen && children}
     </div>
   );
-};
-
-export default Box;
+}

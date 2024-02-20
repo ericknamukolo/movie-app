@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Movie from '../models/movie';
 
 export default function NavBar({

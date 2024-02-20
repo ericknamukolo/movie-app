@@ -2,7 +2,7 @@ import React from 'react';
 import Movie from '../models/movie';
 import MovieListPoster from './movie-list-poster';
 
-const MovieList: React.FC<{ movies: Movie[] }> = ({ movies }) => {
+export default function MovieList({ movies }: { movies: Movie[] }) {
   return (
     <ul className='list'>
       {movies?.map((movie) => (
@@ -10,6 +10,4 @@ const MovieList: React.FC<{ movies: Movie[] }> = ({ movies }) => {
       ))}
     </ul>
   );
-};
-
-export default MovieList;
+}

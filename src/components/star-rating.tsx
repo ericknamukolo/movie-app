@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
-const StarRating: React.FC<{
+export default function StarRating({
+  maxRating = 10,
+  color = '#fcc419',
+  size = 48,
+}: {
   maxRating?: number;
   color?: string;
   size?: number;
-}> = ({ maxRating = 10, color = '#fcc419', size = 48 }) => {
+}) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
@@ -47,14 +51,19 @@ const StarRating: React.FC<{
       <p style={textStyle}>{tempRating === 0 ? rating : tempRating || ''}</p>
     </div>
   );
-};
+}
 
-const Star: React.FC<{
+function Star({
+  click,
+  full = false,
+  onEnter,
+  onLeave,
+}: {
   click: () => void;
   full?: boolean;
   onEnter: () => void;
   onLeave: () => void;
-}> = ({ click, full = false, onEnter, onLeave }) => {
+}) {
   const starStyle = {
     width: '48px',
     height: '48px',
@@ -95,6 +104,4 @@ const Star: React.FC<{
       )}
     </span>
   );
-};
-
-export default StarRating;
+}
