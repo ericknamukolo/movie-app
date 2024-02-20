@@ -1,12 +1,17 @@
 import React from 'react';
 import Movie from '../models/movie';
 
-const Summary: React.FC<{
+export default function Summary({
+  watched,
+  avgImdbRating,
+  avgRuntime,
+  avgUserRating,
+}: {
   watched: Movie[];
   avgImdbRating: number;
   avgUserRating: number;
   avgRuntime: number;
-}> = ({ watched, avgImdbRating, avgRuntime, avgUserRating }) => {
+}) {
   return (
     <div className='summary'>
       <h2>Movies you watched</h2>
@@ -30,6 +35,4 @@ const Summary: React.FC<{
       </div>
     </div>
   );
-};
-
-export default Summary;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Movie from '../models/movie';
 
-const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
+export default function MoviePoster({ movie }: { movie: Movie }) {
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -22,6 +22,4 @@ const MoviePoster: React.FC<{ movie: Movie }> = ({ movie }) => {
       </div>
     </li>
   );
-};
-
-export default MoviePoster;
+}

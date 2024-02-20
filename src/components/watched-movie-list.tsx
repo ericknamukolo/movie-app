@@ -2,7 +2,7 @@ import React from 'react';
 import MoviePoster from './movie-poster';
 import Movie from '../models/movie';
 
-const WatchedMovieList: React.FC<{ watched: Movie[] }> = ({ watched }) => {
+export default function WatchedMovieList({ watched }: { watched: Movie[] }) {
   return (
     <ul className='list'>
       {watched.map((movie) => (
@@ -10,6 +10,4 @@ const WatchedMovieList: React.FC<{ watched: Movie[] }> = ({ watched }) => {
       ))}
     </ul>
   );
-};
-
-export default WatchedMovieList;
+}
