@@ -75,7 +75,7 @@ export default function App() {
 
   useEffect(() => {
     fetchMovies(query);
-  }, []);
+  }, [query]);
 
   async function fetchMovies(query: string) {
     try {
@@ -95,7 +95,7 @@ export default function App() {
 
   function handleInput(val: string) {
     setQuery(val);
-    fetchMovies(val);
+    // fetchMovies(val);
   }
 
   return (
