@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function StarRating({
   maxRating = 10,
   color = '#fcc419',
-  size = 48,
+  size = 20,
 }: {
   maxRating?: number;
   color?: string;
@@ -65,8 +65,8 @@ function Star({
   onLeave: () => void;
 }) {
   const starStyle = {
-    width: '48px',
-    height: '48px',
+    width: '22px',
+    height: '22px',
     display: 'block',
     cursor: 'pointer',
   };

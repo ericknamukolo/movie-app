@@ -1,14 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import Movie from '../models/movie';
 import apiKey from '../constants/keys';
 import Loader from './loader';
+import StarRating from './star-rating';
 
 export default function MovieDetails({
   selectedMovie,
   onClose,
+  onAdd,
+  watchedMovies,
 }: {
   selectedMovie: Movie;
   onClose: () => void;
+  onAdd: (movie: Movie) => void;
+  watchedMovies: Movie[];
 }) {
   const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -24,12 +30,17 @@ export default function MovieDetails({
       );
 
       const data = await res.json();
+      console.log();
       setMovie(data as Movie);
     } catch (e) {
       alert(e);
     } finally {
       setLoading(false);
     }
+  }
+
+  function isAdded(): boolean {
+    return watchedMovies.some((val) => val.imdbID === movie!.imdbID);
   }
   return loading ? (
     <Loader title='Fetching' />
@@ -51,7 +62,15 @@ export default function MovieDetails({
           </p>
         </div>
       </header>
+
       <section>
+        <div className='rating'>
+          <StarRating maxRating={10} />
+          <button className='btn-add' onClick={() => onAdd(movie!)}>
+            {isAdded() ? '- Remove from library' : '+ Add to library'}
+          </button>
+        </div>
+
         <p>
           <em>{movie?.Plot}</em>
         </p>

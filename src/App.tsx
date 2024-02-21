@@ -63,7 +63,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('batman');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState<Movie[]>([]);
 
   useEffect(() => {
     fetchMovies(query);
@@ -97,6 +97,12 @@ export default function App() {
     setSelectedMovie(null);
   }
 
+  function addToWatched(movie: Movie) {
+    setWatched((prev) => {
+      return [...prev, movie];
+    });
+  }
+
   return (
     <>
       <NavBar movies={movies} onQuery={handleInput} query={query} />
@@ -107,12 +113,15 @@ export default function App() {
           ) : (
             <MovieList movies={movies} onSelect={selectMovie} />
           )}
-
-          <StarRating maxRating={10} />
         </Box>
         <Box>
           {selectedMovie ? (
-            <MovieDetails selectedMovie={selectedMovie} onClose={closeMovie} />
+            <MovieDetails
+              selectedMovie={selectedMovie}
+              onClose={closeMovie}
+              onAdd={addToWatched}
+              watchedMovies={watched}
+            />
           ) : (
             <>
               <Summary watched={watched} />
