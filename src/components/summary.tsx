@@ -1,17 +1,17 @@
 import React from 'react';
 import Movie from '../models/movie';
 
-export default function Summary({
-  watched,
-  avgImdbRating,
-  avgRuntime,
-  avgUserRating,
-}: {
-  watched: Movie[];
-  avgImdbRating: number;
-  avgUserRating: number;
-  avgRuntime: number;
-}) {
+const average = (arr: any) =>
+  arr.reduce(
+    (acc: number, cur: number, i: any, arr: string | any[]) =>
+      acc + cur / arr.length,
+    0
+  );
+
+export default function Summary({ watched }: { watched: Movie[] }) {
+  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
+  const avgUserRating = average(watched.map((movie) => movie.userRating));
+  const avgRuntime = average(watched.map((movie) => movie.runtime));
   return (
     <div className='summary'>
       <h2>Movies you watched</h2>
