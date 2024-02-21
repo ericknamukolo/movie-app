@@ -40,7 +40,7 @@ export default function MovieDetails({
   }
 
   function isAdded(): boolean {
-    return watchedMovies.some((val) => val.imdbID === movie!.imdbID);
+    return watchedMovies.some((val) => val.imdbID === movie?.imdbID);
   }
   return loading ? (
     <Loader title='Fetching' />

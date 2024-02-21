@@ -98,6 +98,7 @@ export default function App() {
   }
 
   function addToWatched(movie: Movie) {
+    if (watched.some((mov) => mov.imdbID === movie.imdbID)) return;
     setWatched((prev) => {
       return [...prev, movie];
     });
