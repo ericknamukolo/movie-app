@@ -93,6 +93,10 @@ export default function App() {
     setSelectedMovie(movie);
   }
 
+  function closeMovie() {
+    setSelectedMovie(null);
+  }
+
   return (
     <>
       <NavBar movies={movies} onQuery={handleInput} query={query} />
@@ -108,7 +112,7 @@ export default function App() {
         </Box>
         <Box>
           {selectedMovie ? (
-            <MovieDetails selectedMovie={selectedMovie} />
+            <MovieDetails selectedMovie={selectedMovie} onClose={closeMovie} />
           ) : (
             <>
               <Summary watched={watched} />

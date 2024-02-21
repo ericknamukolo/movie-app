@@ -10,7 +10,7 @@ export default function MovieList({
   onSelect: (movie: Movie) => void;
 }) {
   return (
-    <ul className='list'>
+    <ul className='list list-movies'>
       {movies?.map((movie) => (
         <MovieListPoster movie={movie} key={movie.imdbID} onSelect={onSelect} />
       ))}
