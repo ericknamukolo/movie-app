@@ -97,11 +97,17 @@ export default function App() {
     setSelectedMovie(null);
   }
 
-  function addToWatched(movie: Movie) {
-    if (watched.some((mov) => mov.imdbID === movie.imdbID)) return;
-    setWatched((prev) => {
-      return [...prev, movie];
-    });
+  function addToWatched(movie: Movie, isAdd: boolean) {
+    if (isAdd) {
+      if (watched.some((mov) => mov.imdbID === movie.imdbID)) return;
+      setWatched((prev) => {
+        return [...prev, movie];
+      });
+    } else {
+      setWatched((prev) => {
+        return prev.filter((mov) => mov.imdbID !== movie.imdbID);
+      });
+    }
   }
 
   return (

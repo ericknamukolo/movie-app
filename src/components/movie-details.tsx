@@ -13,7 +13,7 @@ export default function MovieDetails({
 }: {
   selectedMovie: Movie;
   onClose: () => void;
-  onAdd: (movie: Movie) => void;
+  onAdd: (movie: Movie, isAdd: boolean) => void;
   watchedMovies: Movie[];
 }) {
   const [loading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ export default function MovieDetails({
       <section>
         <div className='rating'>
           <StarRating maxRating={10} />
-          <button className='btn-add' onClick={() => onAdd(movie!)}>
+          <button className='btn-add' onClick={() => onAdd(movie!, !isAdded())}>
             {isAdded() ? '- Remove from library' : '+ Add to library'}
           </button>
         </div>
