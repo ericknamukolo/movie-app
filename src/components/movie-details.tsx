@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Movie from '../models/movie';
 import apiKey from '../constants/keys';
+import Loader from './loader';
 
 export default function MovieDetails({
   selectedMovie,
@@ -9,7 +10,7 @@ export default function MovieDetails({
   selectedMovie: Movie;
   onClose: () => void;
 }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState<Movie | null>(null);
   useEffect(() => {
     fetchMovieDetails();
@@ -17,6 +18,7 @@ export default function MovieDetails({
 
   async function fetchMovieDetails() {
     try {
+      setLoading(true);
       const res: Response = await fetch(
         `http://www.omdbapi.com/?apikey=${apiKey}&i=${selectedMovie.imdbID}`
       );
@@ -29,7 +31,9 @@ export default function MovieDetails({
       setLoading(false);
     }
   }
-  return (
+  return loading ? (
+    <Loader title='Fetching' />
+  ) : (
     <div className='details'>
       <header>
         <button className='btn-back' onClick={onClose}>
