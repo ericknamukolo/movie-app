@@ -100,8 +100,15 @@ export default function App() {
   function addToWatched(movie: Movie, isAdd: boolean) {
     if (isAdd) {
       if (watched.some((mov) => mov.imdbID === movie.imdbID)) return;
+      const mov: Movie = {
+        imdbID: movie.imdbID,
+        Title: movie.Title,
+        Poster: movie.Poster,
+        Year: movie.Year,
+        runtime: Number(movie.Runtime?.split(' ').at(0)),
+      };
       setWatched((prev) => {
-        return [...prev, movie];
+        return [...prev, mov];
       });
     } else {
       setWatched((prev) => {

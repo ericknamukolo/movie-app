@@ -4,6 +4,7 @@ type Movie = {
   Year: string;
   Poster: string;
   Runtime?: string;
+  runtime?: number;
   imdbRating?: number;
   userRating?: number;
   Plot?: string;
