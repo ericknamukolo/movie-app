@@ -24,6 +24,10 @@ export default function MovieDetails({
 
   useEffect(() => {
     document.title = `Movie | ${selectedMovie.Title}`;
+
+    return function () {
+      document.title = 'Movie App';
+    };
   }, [selectedMovie]);
 
   async function fetchMovieDetails() {
