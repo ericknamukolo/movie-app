@@ -22,6 +22,10 @@ export default function MovieDetails({
     fetchMovieDetails();
   }, [selectedMovie]);
 
+  useEffect(() => {
+    document.title = `Movie | ${selectedMovie.Title}`;
+  }, [selectedMovie]);
+
   async function fetchMovieDetails() {
     try {
       setLoading(true);
@@ -30,7 +34,6 @@ export default function MovieDetails({
       );
 
       const data = await res.json();
-      console.log();
       setMovie(data as Movie);
     } catch (e) {
       alert(e);

@@ -17,7 +17,7 @@ export default function MoviePoster({ movie }: { movie: Movie }) {
         </p>
         <p>
           <span>⏳</span>
-          <span>{movie.Runtime} min</span>
+          <span>{movie.runtime} min</span>
         </p>
       </div>
     </li>
