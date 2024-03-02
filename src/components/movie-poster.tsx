@@ -1,7 +1,13 @@
 import React from 'react';
 import Movie from '../models/movie';
 
-export default function MoviePoster({ movie }: { movie: Movie }) {
+export default function MoviePoster({
+  movie,
+  remove,
+}: {
+  movie: Movie;
+  remove: (movie: Movie) => void;
+}) {
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -18,6 +24,7 @@ export default function MoviePoster({ movie }: { movie: Movie }) {
         <p>
           <span>⏳</span>
           <span>{movie.runtime} min</span>
+          <button onClick={() => remove(movie)}>❌</button>
         </p>
       </div>
     </li>

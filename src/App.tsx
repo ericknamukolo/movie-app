@@ -69,6 +69,12 @@ export default function App() {
     }
   }
 
+  function removeMovie(movie: Movie) {
+    setWatched((prev) => {
+      return prev.filter((mov) => mov.imdbID !== movie.imdbID);
+    });
+  }
+
   useEffect(() => {
     fetchMovies(query);
   }, [query]);
@@ -99,7 +105,7 @@ export default function App() {
           ) : (
             <>
               <Summary watched={watched} />
-              <WatchedMovieList watched={watched} />
+              <WatchedMovieList watched={watched} remove={removeMovie} />
             </>
           )}
         </Box>
