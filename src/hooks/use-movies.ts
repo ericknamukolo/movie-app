@@ -21,7 +21,7 @@ export default function useMovies(query: string): [Movie[], boolean] {
     } catch (e) {
       alert(e);
     } finally {
-      setLoading(false); ///////////////////////////////////////
+      setLoading(false);
     }
   }
   return [movies, loading];
