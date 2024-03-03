@@ -9,32 +9,16 @@ import MovieList from './components/movie-list';
 import apiKey from './constants/keys';
 import Loader from './components/loader';
 import MovieDetails from './components/movie-details';
+import useMovies from './hooks/useMovies';
 
 export default function App() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState('batman');
+  const [query, setQuery] = useState('');
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [watched, setWatched] = useState<Movie[]>(function () {
     const watchedMovies: Movie[] = JSON.parse(localStorage.getItem('watched')!);
     return watchedMovies;
   });
-
-  async function fetchMovies(query: string) {
-    try {
-      const res: Response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
-      );
-
-      const data = await res.json();
-      if (data.Error !== undefined) return setMovies([]);
-      setMovies(data.Search);
-    } catch (e) {
-      alert(e);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const [movies, loading] = useMovies(query);
 
   function handleInput(val: string) {
     setQuery(val);
@@ -74,10 +58,6 @@ export default function App() {
       return prev.filter((mov) => mov.imdbID !== movie.imdbID);
     });
   }
-
-  useEffect(() => {
-    fetchMovies(query);
-  }, [query]);
 
   useEffect(() => {
     localStorage.setItem('watched', JSON.stringify([...watched]));

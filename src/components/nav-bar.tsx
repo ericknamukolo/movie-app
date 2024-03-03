@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Movie from '../models/movie';
 
 export default function NavBar({
@@ -10,11 +10,16 @@ export default function NavBar({
   onQuery: (value: string) => void;
   query: string;
 }) {
+  const inputEl = useRef<any>(null);
+
+  useEffect(() => {
+    inputEl.current.focus();
+  });
   return (
     <nav className='nav-bar'>
       <div className='logo'>
         <span role='img'>🍿</span>
-        <h1>usePopcorn</h1>
+        <h1>Movie App</h1>
       </div>
       <input
         className='search'
@@ -22,6 +27,7 @@ export default function NavBar({
         placeholder='Search movies...'
         value={query}
         onChange={(e) => onQuery(e.target.value)}
+        ref={inputEl}
       />
       <p className='num-results'>
         Found <strong>{movies.length}</strong> results
