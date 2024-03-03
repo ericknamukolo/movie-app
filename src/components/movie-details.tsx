@@ -17,7 +17,7 @@ export default function MovieDetails({
   watchedMovies: Movie[];
 }) {
   const [loading, setLoading] = useState(false);
-  const [movie, setMovie] = useState<Movie | null>(null);
+  const [movie, setMovie] = useState<Movie | undefined>(undefined);
   useEffect(() => {
     fetchMovieDetails();
   }, [selectedMovie]);

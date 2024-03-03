@@ -13,7 +13,9 @@ import useLocalStorage from './hooks/use-local-storage';
 
 export default function App() {
   const [query, setQuery] = useState('');
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | undefined>(
+    undefined
+  );
 
   const [movies, loading] = useMovies(query);
   const [watched, setWatched] = useLocalStorage();
@@ -27,7 +29,7 @@ export default function App() {
   }
 
   function closeMovie() {
-    setSelectedMovie(null);
+    setSelectedMovie(undefined);
   }
 
   function addToWatched(movie: Movie, isAdd: boolean) {
