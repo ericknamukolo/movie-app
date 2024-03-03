@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import NavBar from './components/nav-bar';
 import Movie from './models/movie';
 import WatchedMovieList from './components/watched-movie-list';
